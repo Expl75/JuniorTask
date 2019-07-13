@@ -15,16 +15,18 @@ namespace JuniorTask.Models
             this.context = context;
         }
 
-        public void Create(Person person)
+        public Person Create(Person person)
         {
             context.People.Add(person);
+            return person;
         }
 
-        public void Delete(string id)
+        public Person Delete(string id)
         {
             Person person = context.People.Find(id);
             if (person != null)
                 context.People.Remove(person);
+            return person;
         }
 
         public IEnumerable<Person> FindAll()
@@ -42,9 +44,10 @@ namespace JuniorTask.Models
             context.SaveChanges();
         }
 
-        public void Update(Person person)
+        public Person Update(Person person)
         {
             context.Entry(person).State = EntityState.Modified;
+            return person;
         }
 
         private bool disposed = false;

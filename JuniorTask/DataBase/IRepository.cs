@@ -10,9 +10,9 @@ namespace JuniorTask.Models
     {
         IEnumerable<T> FindAll();
         T FindPerson(string id);
-        void Delete(string id);
-        void Create(T item);
-        void Update(T item);
+        Person Delete(string id);
+        Person Create(T item);
+        Person Update(T item);
         void Save();
     }
 }
