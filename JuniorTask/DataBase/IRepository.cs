@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace JuniorTask.Models
 {
-    interface IRepository <T>: IDisposable
+    public interface IRepository <T>: IDisposable
         where T : class
     {
         IEnumerable<T> FindAll();
-        T FindPerson(string id);
-        Person Delete(string id);
-        Person Create(T item);
-        Person Update(T item);
+        T Find(string id);
+        T Delete(string id);
+        T Create(T item);
+        T Update(T item);
         void Save();
     }
 }

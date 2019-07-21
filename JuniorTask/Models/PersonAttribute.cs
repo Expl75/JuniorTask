@@ -6,11 +6,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JuniorTask.Models
 {
-    public class Person
+    public class PersonAttribute
     {
         public string Id { get; set; }
         [Required]
-        public string FirstName { get; set; }
-        public Address HomeAddress { get; set; }
+        public string AttributeName { get; set; }
+        [Required]
+        public string AttributeValue { get; set; }
+        [Required]
+        public Person Person { get; set; }
     }
 }

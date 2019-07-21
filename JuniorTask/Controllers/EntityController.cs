@@ -12,9 +12,9 @@ namespace JuniorTask.Controllers
     public class EntityController : ControllerBase
     {
         private readonly IRepository<Person> repository;
-        public EntityController(PersonContext context)
+        public EntityController(IRepository<Person> repo)
         {
-            repository = new PersonRepository(context);
+            repository = repo;
         }
 
         [HttpGet]
@@ -26,7 +26,7 @@ namespace JuniorTask.Controllers
         [HttpGet("{id}")]
         public ActionResult<Person> Get(string id)
         {
-            Person person =  repository.FindPerson(id);
+            Person person =  repository.Find(id);
             if (person == null)
                 return NotFound();
             return new ObjectResult(person);
@@ -48,7 +48,7 @@ namespace JuniorTask.Controllers
         {
             if (person == null)
                 return BadRequest();
-            Person putPerson = repository.FindPerson(person.Id);
+            Person putPerson = repository.Find(person.Id);
             if (putPerson == null)
                 return NotFound();
 
@@ -60,7 +60,7 @@ namespace JuniorTask.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Person> Delete(string id)
         {
-            Person person = repository.FindPerson(id);
+            Person person = repository.Find(id);
             if(User == null)
             {
                 return NotFound();

@@ -34,7 +34,7 @@ namespace JuniorTask.Models
             return context.People;
         }
 
-        public Person FindPerson(string id)
+        public Person Find(string id)
         {
             return context.People.Find(id);
         }

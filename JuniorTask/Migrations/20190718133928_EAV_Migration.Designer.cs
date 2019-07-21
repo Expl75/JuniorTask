@@ -3,14 +3,16 @@ using JuniorTask.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JuniorTask.Migrations
 {
     [DbContext(typeof(PersonContext))]
-    partial class PersonContextModelSnapshot : ModelSnapshot
+    [Migration("20190718133928_EAV_Migration")]
+    partial class EAV_Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +44,6 @@ namespace JuniorTask.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("FirstName")
-                        .IsRequired();
-
                     b.Property<string>("HomeAddressId");
 
                     b.HasKey("Id");
@@ -65,12 +64,12 @@ namespace JuniorTask.Migrations
                     b.Property<string>("AttributeValue")
                         .IsRequired();
 
-                    b.Property<string>("PersonId")
+                    b.Property<string>("personId")
                         .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("personId");
 
                     b.ToTable("personAttributes");
                 });
@@ -84,9 +83,9 @@ namespace JuniorTask.Migrations
 
             modelBuilder.Entity("JuniorTask.Models.PersonAttribute", b =>
                 {
-                    b.HasOne("JuniorTask.Models.Person", "Person")
+                    b.HasOne("JuniorTask.Models.Person", "person")
                         .WithMany()
-                        .HasForeignKey("PersonId")
+                        .HasForeignKey("personId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using JuniorTask.Models;
+using JuniorTask.DataBase;
 
 namespace JuniorTask
 {
@@ -27,6 +28,9 @@ namespace JuniorTask
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IRepository<PersonAttribute>, AttributeRepository>();
+            services.AddTransient<IRepository<Person>, PersonRepository>();
+            services.AddTransient<TypesManager>();
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<PersonContext>(options => options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
